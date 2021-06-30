@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1048922780675",
+    "project_id": "loja-virtual-jdb",
+    "storage_bucket": "loja-virtual-jdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048922780675:android:0774f6ca15bd92e3fa8a36",
+        "android_client_info": {
+          "package_name": "br.net.jdb.loja_virutal_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048922780675-u9qd7ruk9q675v3a6c8h88vhosajovd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhdVx1ZVPwzn5TC8bgU-OLhyscf--zLp4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048922780675-u9qd7ruk9q675v3a6c8h88vhosajovd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
