@@ -110,22 +110,22 @@ class SignupScreen extends StatelessWidget {
                                       content: Text('Senhas não coincidem.'),
                                       backgroundColor: Colors.red,
                                     ));
+                                  }else {
+                                    userManager.signUp(
+                                        usuario: usuario,
+                                        onFail: (e) {
+                                          scaffoldKey.currentState!
+                                              .showSnackBar(SnackBar(
+                                            content:
+                                            Text('Falha ao cadastrar $e'),
+                                            backgroundColor: Colors.red,
+                                          ));
+                                        },
+                                        onSuccess: () {
+                                          //print('sucesso');
+                                          Navigator.of(context).pop();
+                                        });
                                   }
-
-                                  userManager.signUp(
-                                      usuario: usuario,
-                                      onFail: (e) {
-                                        scaffoldKey.currentState!
-                                            .showSnackBar(SnackBar(
-                                          content:
-                                              Text('Falha ao cadastrar $e'),
-                                          backgroundColor: Colors.red,
-                                        ));
-                                      },
-                                      onSuccess: () {
-                                        //print('sucesso');
-                                        Navigator.of(context).pop();
-                                      });
                                 }
                               },
                         child: userManager.loading
