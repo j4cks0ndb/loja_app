@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 class SearchDialog extends StatelessWidget {
 
-  //final TextEditingController searchController = TextEditingController();
+  SearchDialog(this.initialText);
 
-  //final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  String aux = '';
+  final String initialText;
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +16,12 @@ class SearchDialog extends StatelessWidget {
             right: 4,
             child: Card(
           child: TextFormField(
-            //controller: searchController,
+            initialValue: initialText,
             textInputAction: TextInputAction.search,
             autofocus: true,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.symmetric(vertical: 15),
-              suffixIcon: IconButton(
-                icon: Icon(Icons.search),
-                color: Colors.grey[700],
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-              ),
               prefixIcon: IconButton(
                 icon: Icon(Icons.arrow_back),
                 color: Colors.grey[700],

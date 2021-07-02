@@ -13,19 +13,55 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: const Text('Produtos'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () async {
-                final search = await showDialog<String>(context: context,
-                    builder: (_) => SearchDialog()
+        title: Consumer<ProductManager>(
+          builder: (_, productManager, __) {
+            if (productManager.search.isEmpty) {
+              return const Text('Produtos');
+            } else {
+              return LayoutBuilder(builder: (_, constraints) {
+                return GestureDetector(
+                  onTap: () async {
+                    final search = await showDialog<String>(
+                        context: context, builder: (_) => SearchDialog(productManager.search));
+                    if (search != null) {
+                      productManager.search = search;
+                    }
+                  },
+                  child: Container(
+                    child: Text(
+                      productManager.search,
+                      textAlign: TextAlign.center,
+                    ),
+                    width: constraints.biggest.width,
+                  ),
                 );
-                if(search != null){
-                  context.read<ProductManager>().search = search;
-                }
-              },
-              icon: Icon(Icons.search)),
+              });
+            }
+          },
+        ),
+        centerTitle: true,
+        actions: <Widget>[
+          Consumer<ProductManager>(
+            builder: (_, productManager, __) {
+              if (productManager.search.isEmpty) {
+                return IconButton(
+                    onPressed: () async {
+                      final search = await showDialog<String>(
+                          context: context, builder: (_) => SearchDialog(productManager.search));
+                      if (search != null) {
+                        productManager.search = search;
+                      }
+                    },
+                    icon: Icon(Icons.search));
+              } else {
+                return IconButton(
+                    onPressed: () async {
+                      productManager.search = '';
+                    },
+                    icon: Icon(Icons.close));
+              }
+            },
+          )
         ],
       ),
       body: Consumer<ProductManager>(builder: (_, productManager, __) {
@@ -39,6 +75,14 @@ class ProductsScreen extends StatelessWidget {
               );
             });
       }),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        foregroundColor: Theme.of(context).primaryColor,
+        onPressed: (){
+          Navigator.of(context).pushNamed('/cart');
+        },
+        child: Icon(Icons.shopping_cart),
+      ),
     );
   }
 }

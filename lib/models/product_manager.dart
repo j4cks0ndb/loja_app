@@ -18,6 +18,8 @@ class ProductManager extends ChangeNotifier{
 
   set search(String value) {
     _search = value;
+
+    //filteredProducts;
     notifyListeners();
   }
 

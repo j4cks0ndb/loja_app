@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virutal_app/common/custom_drawer/custom_drawer.dart';
 import 'package:loja_virutal_app/models/page_manager.dart';
+import 'package:loja_virutal_app/screens/home/home_screen.dart';
 import 'package:loja_virutal_app/screens/login/login_screen.dart';
 import 'package:loja_virutal_app/screens/products/products_screen.dart';
 import 'package:provider/provider.dart';
@@ -18,12 +19,7 @@ class BaseScreen extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
           //LoginScreen(),
-          Scaffold(
-            appBar: AppBar(
-              title: const Text('Home'),
-            ),
-            drawer: CustomDrawer(),
-          ),
+          HomeScreen(),
           ProductsScreen(),
           Container(
             color: Colors.yellow,
