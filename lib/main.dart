@@ -14,6 +14,7 @@ import 'package:loja_virutal_app/screens/products/products_screen.dart';
 import 'package:loja_virutal_app/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'models/admin_users_manager.dart';
 import 'models/home_manager.dart';
 
 Future<void> main() async {
@@ -44,7 +45,13 @@ class MyApp extends StatelessWidget {
           create: (_) => CartManager(),
           lazy: false,
           update: (_,userManager, cartManager) => cartManager!..updateUser(userManager),
-        )
+        ),
+        ChangeNotifierProxyProvider<Usermanager, AdminUsersManager>(
+          create: (_) => AdminUsersManager(),
+          lazy: false,
+          update: (_, userManager, adminUsersManager) =>
+          adminUsersManager!..updateUser(userManager),
+        ),
       ],
       child: MaterialApp(
         title: 'Loja',

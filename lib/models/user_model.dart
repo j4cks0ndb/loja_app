@@ -19,6 +19,8 @@ class UserModel {
 
   String? confirmSenha;
 
+  bool admin = false;
+
   DocumentReference get firestoreRef => FirebaseFirestore.instance.doc('users/$id');
 
   CollectionReference get cartReference => firestoreRef.collection('cart');
