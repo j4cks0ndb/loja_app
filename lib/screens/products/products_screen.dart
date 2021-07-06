@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virutal_app/common/custom_drawer/custom_drawer.dart';
 import 'package:loja_virutal_app/models/product_manager.dart';
+import 'package:loja_virutal_app/models/user_manager.dart';
 import 'package:loja_virutal_app/screens/products/components/product_list_tile.dart';
 import 'package:loja_virutal_app/screens/products/components/search_dialog.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class ProductsScreen extends StatelessWidget {
               return const Text('Produtos');
             } else {
               return LayoutBuilder(builder: (_, constraints) {
-                return GestureDetector(
+                return InkWell(
                   onTap: () async {
                     final search = await showDialog<String>(
                         context: context, builder: (_) => SearchDialog(productManager.search));
@@ -61,7 +62,18 @@ class ProductsScreen extends StatelessWidget {
                     icon: Icon(Icons.close));
               }
             },
-          )
+          ),
+          Consumer<Usermanager>(
+            builder: (_,userManager,__){
+              if(userManager.adminEnabled){
+                return IconButton(onPressed: (){
+                  Navigator.of(context).pushNamed('/edit_product',arguments: null);
+                }, icon: Icon(Icons.add));
+              }else{
+                return Container();
+              }
+            },
+          ),
         ],
       ),
       body: Consumer<ProductManager>(builder: (_, productManager, __) {

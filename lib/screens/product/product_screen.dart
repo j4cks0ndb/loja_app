@@ -21,6 +21,19 @@ class ProductScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(produto.name.toString()),
           centerTitle: true,
+          actions: <Widget>[
+            Consumer<Usermanager>(
+              builder: (_,userManager,__){
+                if(userManager.adminEnabled){
+                  return IconButton(onPressed: (){
+                    Navigator.of(context).pushReplacementNamed('/edit_product',arguments: produto);
+                  }, icon: Icon(Icons.edit));
+                }else{
+                  return Container();
+                }
+              },
+            ),
+          ],
         ),
         body: ListView(
           children: <Widget>[
@@ -67,7 +80,7 @@ class ProductScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'R\$ 19,23',
+                    'R\$ ${produto.basePrice!.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontSize: 22,
                       color: primaryColor,

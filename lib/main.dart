@@ -8,6 +8,7 @@ import 'package:loja_virutal_app/models/product_model.dart';
 import 'package:loja_virutal_app/models/user_manager.dart';
 import 'package:loja_virutal_app/screens/base/base_screen.dart';
 import 'package:loja_virutal_app/screens/cart/cart_screen.dart';
+import 'package:loja_virutal_app/screens/edit_product/edit_product_sceen.dart';
 import 'package:loja_virutal_app/screens/login/login_screen.dart';
 import 'package:loja_virutal_app/screens/product/product_screen.dart';
 import 'package:loja_virutal_app/screens/products/products_screen.dart';
@@ -44,13 +45,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<Usermanager, CartManager>(
           create: (_) => CartManager(),
           lazy: false,
-          update: (_,userManager, cartManager) => cartManager!..updateUser(userManager),
+          update: (_, userManager, cartManager) =>
+              cartManager!..updateUser(userManager),
         ),
         ChangeNotifierProxyProvider<Usermanager, AdminUsersManager>(
           create: (_) => AdminUsersManager(),
           lazy: false,
           update: (_, userManager, adminUsersManager) =>
-          adminUsersManager!..updateUser(userManager),
+              adminUsersManager!..updateUser(userManager),
         ),
       ],
       child: MaterialApp(
@@ -74,12 +76,18 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => SignupScreen());
             case '/cart':
               return MaterialPageRoute(builder: (_) => CartScreen());
+            case '/edit_product':
+              return MaterialPageRoute(builder: (_) {
+                if (settings.arguments != null) {
+                  return EditProductScreen(settings.arguments as ProductModel);
+                } else {
+                  return EditProductScreen(null);
+                }
+              });
             case '/product':
               return MaterialPageRoute(
-                  builder: (_) => ProductScreen(
-                      settings.arguments as ProductModel
-                  )
-              );
+                  builder: (_) =>
+                      ProductScreen(settings.arguments as ProductModel));
 
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
