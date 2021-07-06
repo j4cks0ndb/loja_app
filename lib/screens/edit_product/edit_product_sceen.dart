@@ -142,13 +142,17 @@ class EditProductScreen extends StatelessWidget {
                           onPressed: !product.loading ? () async {
                             if(formKey.currentState!.validate()){
                               formKey.currentState!.save();
+                             product.loading = true;
                              await product.save();
                              context.read<ProductManager>().update(product);
+                              product.loading = false;
                              Navigator.of(context).pop();
                             }
                           } : null,
-                          child: !product.loading ?
-                            CircularProgressIndicator()
+                          child: product.loading ?
+                          CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          )
                           : Text('Salvar'),
                         ),
                       );

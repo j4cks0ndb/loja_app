@@ -131,8 +131,7 @@ class ProductModel extends ChangeNotifier{
       }else{
         final UploadTask task = storageRef.child(Uuid().v1()).putFile(newImage as File);
         final TaskSnapshot snapshot = await task.whenComplete(() => null);
-        String url = snapshot.ref.getDownloadURL().toString();
-        updateImages.add(url);
+        await snapshot.ref.getDownloadURL().then((value) => updateImages.add(value));
       }
     }
 
